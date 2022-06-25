@@ -29,7 +29,7 @@ data "aws_ami" "timeoff_server" {
 
 ## SG ##
 module "security_group" {
-  source  = "../modules/sg_security_group"
+  source  = "/modules/sg_security_group"
 
   name        = var.name
   description = "Security group for Qlik usage with EC2 instance"
@@ -38,26 +38,19 @@ module "security_group" {
   # ingress
   ingress_with_cidr_blocks = [
     {
-      from_port   = 22
-      to_port     = 22
+      from_port   = 80
+      to_port     = 80
       protocol    = "tcp"
       description = "SSH access"
       cidr_blocks = "0.0.0.0/0"
-    },
-    {
-      from_port   = 0
-      to_port     = 0
-      protocol    = "-1"
-      description = "vpc all traffic"
-      cidr_blocks = "172.31.0.0/16"
     }
   ]
 
   # egress
   egress_with_cidr_blocks = [
     {
-      from_port   = 0
-      to_port     = 65535
+      from_port   = 443
+      to_port     = 443
       protocol    = "all"
       description = "All traffic out"
       cidr_blocks = "0.0.0.0/0"
@@ -73,7 +66,7 @@ module "security_group" {
 
 
 module "ec2" {
-  source = "../modules/ec2_instance"
+  source = "/modules/ec2_instance"
 
   name                        = var.name
   ami                         = data.aws_ami.timeoff_server.id
@@ -109,7 +102,7 @@ resource "aws_network_interface" "this" {
 }
 
 module "ec2_network_interface" {
-  source = "../modules/ec2_instance"
+  source = "/modules/ec2_instance"
 
   name = "${var.name}-network-interface"
 
