@@ -10,23 +10,32 @@
 
 
 ## implementation:
-Clone the repo
+* Clone the repo
+```shell
 terraform init
-terraform plan
-terraformapply
 
-In case you want to modify, you must start from the code found at: https://github.com/timeoff-management/timeoff-management-application
+terraform plan
+
+terraformapply
+```
+
+#### In case you want to modify, you must start from the code found at: https://github.com/timeoff-management/timeoff-management-application
 At the end of the modifications you must do:
 
 Build:
 
-$ docker build -t timeoff .
+```shell
+docker build -t timeoff .
+```
 
 Run:
 
-$ docker run -e NODE_ENV=production -e MYSQL_USER=timeoff timeoff
-
+```shell
+docker run -e NODE_ENV=production -e MYSQL_USER=timeoff timeoff
+```
 
 tags:
 
+```shell
 docker tag timeoff jaimesan/timeoff-management:v<next-version>
+```
