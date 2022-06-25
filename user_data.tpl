@@ -26,4 +26,4 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io
 
 sleep 60
 
-docker run -p 3000:3000 jaimesan/timeoff-management:v1.0.0
+docker run -p 3000:3000 jaimesan/timeoff-management:latest
