@@ -29,7 +29,7 @@ data "aws_ami" "timeoff_server" {
 
 ## SG ##
 module "security_group" {
-  source  = "../modules/sg_security_group"
+  source  = "/modules/sg_security_group"
 
   name        = var.name
   description = "Security group for Qlik usage with EC2 instance"
@@ -73,7 +73,7 @@ module "security_group" {
 
 
 module "ec2" {
-  source = "../modules/ec2_instance"
+  source = "/modules/ec2_instance"
 
   name                        = var.name
   ami                         = data.aws_ami.timeoff_server.id
@@ -109,7 +109,7 @@ resource "aws_network_interface" "this" {
 }
 
 module "ec2_network_interface" {
-  source = "../modules/ec2_instance"
+  source = "/modules/ec2_instance"
 
   name = "${var.name}-network-interface"
 
